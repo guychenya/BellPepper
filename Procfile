@@ -1,0 +1,1 @@
+web: streamlit run chandra/scripts/app.py --server.port $PORT
