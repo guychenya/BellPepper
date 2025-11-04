@@ -1,3 +1,4 @@
+import torch
 from typing import List
 
 from qwen_vl_utils import process_vision_info
@@ -29,7 +30,8 @@ def generate_hf(
         return_tensors="pt",
         padding_side="left",
     )
-    inputs = inputs.to("cuda")
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    inputs = inputs.to(device)
 
     # Inference: Generation of the output
     generated_ids = model.generate(**inputs, max_new_tokens=max_output_tokens)
